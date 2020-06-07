@@ -1,0 +1,685 @@
+swagger: "2.0"
+info:
+  description: "API para acesso aos dados da Secretaria Municipal de Saúde sobre COVID-19"
+  version: "1.0.0"
+  title: "API Covid19 Vilhena - RO"
+  termsOfService: "https://api.covid19.adsvilhena.ninja/terms/"
+  contact:
+    email: "marco.andrade@ifro.edu.br"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "api.covid19.adsvilhena.ninja"
+basePath: "/v1"
+
+schemes:
+- "https"
+
+paths:
+  /bairros:
+    get:
+      tags:
+      - "Bairro"
+      description: "Lista os  bairros"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Operação realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Bairro"
+        "404":
+          description: "Nenhum dado encontrado"
+
+    post:
+      tags:
+      - "Bairro"
+      description: "Inseri os dados de um novo bairro"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Bairro"
+        required: true
+        schema:
+          $ref: "#/definitions/Bairro"
+      responses:
+        "200":
+          description: "Novo bairro inserido com sucesso"
+          schema:
+            $ref: "#/definitions/Bairro"
+      security:
+        - api_key: []
+
+    put:
+      tags:
+      - "Bairro"
+      description: "Atualiza os dados de um bairro"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Bairro"
+        required: true
+        schema:
+          $ref: "#/definitions/Bairro"
+      responses:
+        "200":
+          description: "Bairro alterado com sucesso"
+          schema:
+            $ref: "#/definitions/Bairro"
+        "404":
+          description: "Nenhum bairro encontrado para este id"
+      security:
+        - api_key: []
+    
+    delete:
+      tags:
+      - "Bairro"
+      description: "Deleta um bairro"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Bairro"
+        required: true
+        schema:
+          $ref: "#/definitions/Bairro"
+      responses:
+        "200":
+          description: "Bairro deletado com sucesso"
+        "404":
+          description: "Nenhum bairro encontrado para este id"
+      security:
+        - api_key: []
+
+  /casos:
+    get:
+      tags:
+      - "Casos"
+      description: "Lista os dados dos casos"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Operação realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Caso"
+        "404":
+          description: "Nenhum dado encontrado"
+
+    post:
+      tags:
+      - "Casos"
+      description: "Inseri os dados dos casos"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Caso"
+        required: true
+        schema:
+          $ref: "#/definitions/Caso"
+      responses:
+        "200":
+          description: "Sexos inseridos com sucesso"
+          schema:
+            $ref: "#/definitions/Caso"
+      security:
+        - api_key: []
+
+    delete:
+      tags:
+      - "Casos"
+      description: "Deleta um dado sobre caso"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Caso"
+        required: true
+        schema:
+          $ref: "#/definitions/Caso"
+      responses:
+        "200":
+          description: "Dado sobre casos deletado com sucesso"
+        "404":
+          description: "Nenhum dado sobre casos encontrado para este id"
+      security:
+        - api_key: []
+
+  /faixasetarias:
+    get:
+      tags:
+      - "Faixa Etária"
+      description: "Lista os dados das faixas etárias"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Operação realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/FaixaEtaria"
+        "404":
+          description: "Nenhum dado encontrado"
+
+    post:
+      tags:
+      - "Faixa Etária"
+      description: "Inseri os dados das faixas etárias"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto FaixaEtaria"
+        required: true
+        schema:
+          $ref: "#/definitions/FaixaEtaria"
+      responses:
+        "200":
+          description: "Dados das faixas etárias inseridos com sucesso"
+          schema:
+            $ref: "#/definitions/FaixaEtaria"
+      security:
+        - api_key: []
+
+    delete:
+      tags:
+      - "Faixa Etária"
+      description: "Deleta um dado sobre faixa etária"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto FaixaEtaria"
+        required: true
+        schema:
+          $ref: "#/definitions/FaixaEtaria"
+      responses:
+        "200":
+          description: "Dado sobre faixas etárias deletados com sucesso"
+        "404":
+          description: "Nenhum dado sobre sexo encontrado para este id"
+      security:
+        - api_key: []
+
+  /leitos:
+    get:
+      tags:
+      - "Leito"
+      description: "Lista os dados dos leitos"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Operação realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Leito"
+        "404":
+          description: "Nenhum dado encontrado"
+
+    post:
+      tags:
+      - "Leito"
+      description: "Inseri os dados dos leitos"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Leito"
+        required: true
+        schema:
+          $ref: "#/definitions/Leito"
+      responses:
+        "200":
+          description: "Dados dos leitos inseridos com sucesso"
+          schema:
+            $ref: "#/definitions/Leito"
+      security:
+        - api_key: []
+
+    delete:
+      tags:
+      - "Leito"
+      description: "Deleta um dado sobre leito"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Leito"
+        required: true
+        schema:
+          $ref: "#/definitions/Leito"
+      responses:
+        "200":
+          description: "Dado sobre leito deletado com sucesso"
+        "404":
+          description: "Nenhum dado sobre leito encontrado para este id"
+      security:
+        - api_key: []
+
+  /sexos:
+    get:
+      tags:
+      - "Sexo"
+      description: "Lista os dados dos sexos"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Operação realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Sexo"
+        "404":
+          description: "Nenhum dado encontrado"
+
+    post:
+      tags:
+      - "Sexo"
+      description: "Inseri os dados dos sexos"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Sexo"
+        required: true
+        schema:
+          $ref: "#/definitions/Sexo"
+      responses:
+        "200":
+          description: "Sexos inseridos com sucesso"
+          schema:
+            $ref: "#/definitions/Sexo"
+      security:
+        - api_key: []
+
+    delete:
+      tags:
+      - "Sexo"
+      description: "Deleta um dado sobre sexo"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Sexo"
+        required: true
+        schema:
+          $ref: "#/definitions/Sexo"
+      responses:
+        "200":
+          description: "Dado sobre sexo deletado com sucesso"
+        "404":
+          description: "Nenhum dado sobre sexo encontrado para este id"
+      security:
+        - api_key: []
+
+  /totalizadores:
+    get:
+      tags:
+      - "Totalizador"
+      description: "Lista os dados dos totalizadores"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Operação realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Totalizador"
+        "404":
+          description: "Nenhum dado encontrado"
+
+    post:
+      tags:
+      - "Totalizador"
+      description: "Inseri os dados dos totalizadores"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Totalizador"
+        required: true
+        schema:
+          $ref: "#/definitions/Totalizador"
+      responses:
+        "200":
+          description: "Totalizadores inseridos com sucesso"
+          schema:
+            $ref: "#/definitions/Totalizador"
+      security:
+        - api_key: []
+
+    delete:
+      tags:
+      - "Totalizador"
+      description: "Deleta um totalizador"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Totalizador"
+        required: true
+        schema:
+          $ref: "#/definitions/Totalizador"
+      responses:
+        "200":
+          description: "Totalizador deletado com sucesso"
+        "404":
+          description: "Nenhum totalizador encontrado para este id"
+      security:
+        - api_key: []
+
+  /versoes:
+    get:
+      tags:
+      - "Versão"
+      description: "Lista os dados da última versão"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Operação realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Versao"
+        "404":
+          description: "Nenhum dado encontrado"
+
+    post:
+      tags:
+      - "Versão"
+      description: "Inseri os dados de uma nova versão"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Versao"
+        required: true
+        schema:
+          $ref: "#/definitions/Versao"
+      responses:
+        "200":
+          description: "Nova versão inserida com sucesso"
+          schema:
+            $ref: "#/definitions/Versao"
+      security:
+        - api_key: []
+
+    put:
+      tags:
+      - "Versão"
+      description: "Atualiza a versão dos dados"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Versao"
+        required: true
+        schema:
+          $ref: "#/definitions/Versao"
+      responses:
+        "200":
+          description: "Versão alterada com sucesso"
+          schema:
+            $ref: "#/definitions/Versao"
+        "404":
+          description: "Nenhuma versão encontrada para este id"
+      security:
+        - api_key: []
+    
+    delete:
+      tags:
+      - "Versão"
+      description: "Deleta a última versão dos dados"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Versao"
+        required: true
+        schema:
+          $ref: "#/definitions/Versao"
+      responses:
+        "200":
+          description: "Versão deletada com sucesso"
+        "404":
+          description: "Nenhuma versão encontrada para este id"
+      security:
+        - api_key: []
+
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+
+definitions:
+  Bairro:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      nome:
+        type: "string"
+      casos_ativos:
+        type: "integer"
+        format: "int64"
+      coordenadas:
+        type: "integer"
+        # type: "array"
+      data:
+        type: "string"
+  
+  Caso:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      dia:
+        type: "integer"
+        format: "int64"
+      data:
+        type: "string"
+        # format: "date"
+      ativos:
+        type: "integer"
+        format: "int64"
+      suspeitos:
+        type: "integer"
+        format: "int64"
+      confirmados:
+        type: "integer"
+        format: "int64"
+      recuperados:
+        type: "integer"
+        format: "int64"
+      descartados:
+        type: "integer"
+        format: "int64"
+      internados:
+        type: "integer"
+        format: "int64"
+      novos:
+        type: "integer"
+        format: "int64"
+      obitos:
+        type: "integer"
+        format: "int64"
+  
+  FaixaEtaria:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      de0a9:
+        type: "integer"
+        format: "int64"
+      de10a19:
+        type: "integer"
+        format: "int64"
+      de20a29:
+        type: "integer"
+        format: "int64"
+      de30a39:
+        type: "integer"
+        format: "int64"
+      de40a49:
+        type: "integer"
+        format: "int64"
+      de50a59:
+        type: "integer"
+        format: "int64"
+      maisde60:
+        type: "integer"
+        format: "int64"
+      sigilosos:
+        type: "integer"
+        format: "int64"
+      data:
+        type: "string"
+  Leito:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      uti:
+        type: "integer"
+        format: "int64"
+      utis_utilizadas:
+        type: "integer"
+        format: "int64"
+      enfermarias:
+        type: "integer"
+        format: "int64"
+      enfermarias_utilizadas:
+        type: "integer"
+        format: "int64"
+      data:
+        type: "string"
+        
+  Sexo:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      feminino:
+        type: "integer"
+        format: "int64"
+      masculino:
+        type: "integer"
+        format: "int64"
+      sigiloso:
+        type: "integer"
+        format: "int64"
+      data:
+        type: "string"
+
+  Totalizador:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      ativos:
+        type: "integer"
+        format: "int64"
+      suspeitos:
+        type: "integer"
+        format: "int64"
+      confirmados:
+        type: "integer"
+        format: "int64"
+      recuperados:
+        type: "integer"
+        format: "int64"
+      descartados:
+        type: "integer"
+        format: "int64"
+      internados:
+        type: "integer"
+        format: "int64"
+      novos:
+        type: "integer"
+        format: "int64"
+      obitos:
+        type: "integer"
+        format: "int64"
+      data:
+        type: "string"
+
+  Versao:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      versao:
+        type: "integer"
+        format: "int64"
+      data:
+        type: "string"

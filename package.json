@@ -1,0 +1,35 @@
+{
+  "name": "api-covid19",
+  "version": "1.0.0",
+  "description": "API da plataforma de acompanhamento do Covid-19",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoaugustoandrade/api-covid19.git"
+  },
+  "keywords": [
+    "covid-19"
+  ],
+  "author": "Marco Andrade",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcoaugustoandrade/api-covid19/issues"
+  },
+  "homepage": "https://github.com/marcoaugustoandrade/api-covid19#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.17",
+    "morgan": "^1.10.0",
+    "redis": "^3.0.2",
+    "swagger-ui-express": "^4.1.4",
+    "yamljs": "^0.3.0"
+  }
+}
