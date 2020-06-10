@@ -53,10 +53,7 @@ exports.inserir = (req, res) => {
         // A data do caso é informada pela planilha
         // Nos outros casos a data é a data da criação
         const data = req.body.data.split('/')
-        const nova_data = new Date()
-        nova_data.setDate(data[0] - 1)
-        nova_data.setMonth(data[1] - 1)
-        nova_data.setFullYear(data[2])
+        const nova_data =  new Date(data[2], (data[1] - 1), data[0])
         
         const leito = new Caso({
             dia: req.body.dia,
@@ -74,7 +71,6 @@ exports.inserir = (req, res) => {
             atualizarCache()
             res.status(201)
             res.send(data)
-            // res.send({message: 'Dados sobre casos inseridos com sucesso!'})
         })
     } catch (err) {
         res.status(500)
@@ -86,18 +82,27 @@ exports.deletar = (req, res) => {
 
     try {
         
-        Caso.findByIdAndDelete(req.params.id, (err,data) => {
-            if (data){
+        if (req.params.id){
+            Caso.findByIdAndDelete(req.params.id, (err,data) => {
+                if (data){
+                    atualizarCache()
+                    res.status(200)
+                    res.send({message: "Dados sobre casos deletados com sucesso!"})
+                } else {
+                    res.status(404)
+                    res.send({message: "Dados sobre casos não encontrados"})
+                }
+            })
+        } else {
+            Caso.deleteMany((err, data) => {
                 atualizarCache()
                 res.status(200)
                 res.send({message: "Dados sobre casos deletados com sucesso!"})
-            } else {
-                res.status(404)
-                res.send({message: "Dados sobre casos não encontrados"})
-            }
-        })
+            })
+        }
     } catch (err) {
         res.status(500)
         res.send({message: err.message})
     }
 }
+

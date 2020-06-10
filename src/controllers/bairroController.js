@@ -19,27 +19,42 @@ exports.listar = (req, res) => {
 
     try {
 
-        client.get("bairros", (err, data) => {
-            if (data){
-                res.status(200)
-                res.send(JSON.parse(data))
-                console.log('/bairros acessou o cache (Redis)')
-            } else {
-                Bairro.find({})
-                    .then((dados) => {
-                        if (dados.length > 0){
-                            res.status(200)
-                            res.send(dados)
-                            atualizarCache()
-                            console.log('/bairros acessou o banco (MongoDB)')
-                        } else {
-                            res.status(404)
-                            res.send({message: "Nenhum dados sobre bairros cadastrados"})
-                            console.log('/bairros acessou o banco (MongoDB) sem dados')
-                        }
-                    })
-            }
-        })
+        if (req.params.nome){
+            Bairro.find({nome: req.params.nome})
+                .then((dados) => {
+                    if (dados.length > 0){
+                        res.status(200)
+                        res.send(dados)
+                    } else {
+                        res.status(404)
+                        res.send({message: "Nenhum dado sobre esse bairro cadastrado"})
+                    }
+                })
+        } else {
+            
+            client.get("bairros", (err, data) => {
+                if (data){
+                    res.status(200)
+                    res.send(JSON.parse(data))
+                    console.log('/bairros acessou o cache (Redis)')
+                } else {
+                    Bairro.find({})
+                        .then((dados) => {
+                            if (dados.length > 0){
+                                res.status(200)
+                                res.send(dados)
+                                atualizarCache()
+                                console.log('/bairros acessou o banco (MongoDB)')
+                            } else {
+                                res.status(404)
+                                res.send({message: "Nenhum dados sobre bairros cadastrados"})
+                                console.log('/bairros acessou o banco (MongoDB) sem dados')
+                            }
+                        })
+                }
+            })
+        }
+
     } catch (err) {
         res.status(500)
         res.send({message: err.message})

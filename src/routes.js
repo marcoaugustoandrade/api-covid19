@@ -12,14 +12,14 @@ const autenticacaoController = require('.//controllers/autenticacaoController')
 
 // TODO: filtrar por casos ativos
 // TODO: implementar filtro por id
-router.get('/bairros/:id?', bairroController.listar)
+router.get('/bairros/:nome?', bairroController.listar)
 router.post('/bairros', autenticacaoController.verificar, bairroController.inserir)
 router.put('/bairros/:id', autenticacaoController.verificar, bairroController.alterar)
 router.delete('/bairros/:id', autenticacaoController.verificar, bairroController.deletar)
 
 router.get('/casos', casoController.listar)
 router.post('/casos', autenticacaoController.verificar, casoController.inserir)
-router.delete('/casos/:id', autenticacaoController.verificar, casoController.deletar)
+router.delete('/casos/:id?', autenticacaoController.verificar, casoController.deletar)
 
 router.get('/faixasetarias', faixaEtariaController.listar)
 router.post('/faixasetarias', autenticacaoController.verificar, faixaEtariaController.inserir)

@@ -11,7 +11,11 @@ Copie o arquivo `.env.example` para `.env`, para definir a porta da API, o secre
 Edite o arquivo `src/gerar_senha.js`.
 node src/gerar_senha.js
 
-# Rodando a API
+# Importando bairros e versão
+===> mongo src/database/versoes.json
+===> mongo src/database/bairros_vilhena.json
+
+# Rodando manualmente a API
 npm run start
 
 # Rodando os testes
